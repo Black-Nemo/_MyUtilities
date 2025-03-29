@@ -1,0 +1,17 @@
+{
+  "name": "Platform",
+  "references": [
+    "NemoUtility"
+  ],
+  "optionalReferences": [
+    "YandexGame"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": []
+}

@@ -33,7 +33,9 @@ namespace NemoUtility
                 case PlatformTypes.Local:
                     break;
                 case PlatformTypes.YandexGames:
+#if YANDEX_SDK
                     _currentPlatform = new YandexGamesPlatform();
+#endif
                     break;
                 case PlatformTypes.CrazyGames:
                     break;

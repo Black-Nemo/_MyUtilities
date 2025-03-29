@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +5,8 @@ namespace NemoUtility
 {
     public class MouseInfoManager : MonoBehaviour
     {
+        public bool IsMobile;
+
         [SerializeField] private GameObject InfoTextPrefab;
         [SerializeField] private Vector2 LocationText;
         [SerializeField] private Vector2 LocationTextMobile;
@@ -64,7 +65,7 @@ namespace NemoUtility
         {
             if (rememberTextObject != null)
             {
-                if (GameManager.Instance.IsMobile)
+                if (IsMobile)
                 {
                     rememberTextObject.transform.position = Input.mousePosition + new Vector3(LocationTextMobile.x, LocationTextMobile.y, 0);
                 }
