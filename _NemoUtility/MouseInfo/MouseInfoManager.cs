@@ -37,7 +37,6 @@ namespace NemoUtility
             if (rememberTextObject != null) { Destroy(rememberTextObject); }
             rememberTextObject = Instantiate(InfoTextPrefab, canvas);
             rememberTextObject.transform.SetParent(canvas);
-            rememberTextObject.transform.position += new Vector3(LocationText.x, LocationText.y, 0);
             rememberTextObject.GetComponent<MouseInfo>().Text.text = str;
             rememberTextObject.GetComponent<Image>().color = bgColor;
         }
@@ -64,15 +63,29 @@ namespace NemoUtility
         {
             if (rememberTextObject != null)
             {
-                if (GameManager.Instance.IsMobile)
+                Vector2 locationText;
+                if (Application.isMobilePlatform)
                 {
-                    rememberTextObject.transform.position = Input.mousePosition + new Vector3(LocationTextMobile.x, LocationTextMobile.y, 0);
+                    locationText = LocationTextMobile;
                 }
                 else
                 {
-                    rememberTextObject.transform.position = Input.mousePosition + new Vector3(LocationText.x, LocationText.y, 0);
+                    locationText = LocationText;
                 }
 
+                var rectTrnsfrm = rememberTextObject.GetComponent<RectTransform>();
+                Vector2 screenSize = new Vector2(Screen.width, Screen.height);
+                Vector2 mousePos = Input.mousePosition;
+
+                rememberTextObject.transform.position = mousePos;
+                if ((rectTrnsfrm.sizeDelta.x * canvas.localScale.x) + mousePos.x + locationText.x > screenSize.x)
+                {
+                    rememberTextObject.transform.position = new Vector3(screenSize.x - (rectTrnsfrm.sizeDelta.x * canvas.localScale.x), mousePos.y + locationText.y, 0);
+                }
+                else
+                {
+                    rememberTextObject.transform.position += new Vector3(locationText.x, locationText.y, 0);
+                }
             }
             if (rememberImageObject != null)
             {

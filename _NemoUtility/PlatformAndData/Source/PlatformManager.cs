@@ -10,6 +10,21 @@ namespace NemoUtility
         private Platform _currentPlatform;
 
 
+        private void OnEnable()
+        {
+            if (_currentPlatform != null)
+            {
+                _currentPlatform.OnEnable();
+            }
+        }
+        private void OnDisable()
+        {
+            if (_currentPlatform != null)
+            {
+                _currentPlatform.OnDisable();
+            }
+        }
+
 
         public static PlatformManager Instance;
         private void Awake()
@@ -41,9 +56,9 @@ namespace NemoUtility
             }
         }
 
-        public void FullScreenShow()
+        public void FullScreenShow(Action finishAction)
         {
-            _currentPlatform.FullScreenShow();
+            _currentPlatform.FullScreenShow(finishAction);
         }
         public void Rewarded(Action rewardComplateAction)
         {
@@ -65,6 +80,25 @@ namespace NemoUtility
         public void SetLeaderBoardValue(string id, double value)
         {
             _currentPlatform.SetLeaderBoardValue(id, value);
+        }
+
+        public string GetLanguage()
+        {
+            return _currentPlatform.GetLanguage();
+        }
+        public void SetLanguage(string lang)
+        {
+            _currentPlatform.SetLanguage(lang);
+        }
+
+        public void ResetData()
+        {
+            _currentPlatform.ResetData();
+        }
+
+        public Action<string> GetSwitchLangEvent()
+        {
+            return _currentPlatform.SwitchLangEvent;
         }
     }
 }

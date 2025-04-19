@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b78564193c76241adc79cf1fb219d2, type: 3}
+  m_Name: NLocalization
+  m_EditorClassIdentifier: 
+  Localizes:
+  - {fileID: 11400000, guid: d009d01e85b9e5b44bb6d7eb715151dd, type: 2}
+  - {fileID: 11400000, guid: f1d5e2a10abe54846bc5de38c9376519, type: 2}
+  CurrentLocalize: {fileID: 11400000, guid: f1d5e2a10abe54846bc5de38c9376519, type: 2}
+  LocalizeStrings:
+  - Key: Key_Play
+    LocalizedStringTableSlots:
+    - Localize: {fileID: 11400000, guid: d009d01e85b9e5b44bb6d7eb715151dd, type: 2}
+      LocalizeString: Play
+    - Localize: {fileID: 11400000, guid: f1d5e2a10abe54846bc5de38c9376519, type: 2}
+      LocalizeString: Oynamak
+  LocalizeSprites: []

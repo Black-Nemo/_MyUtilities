@@ -1,29 +1,30 @@
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 
-public class VersionPrompt : IPreprocessBuildWithReport
+namespace NemoUtility
 {
-    // Build adımının sırasını belirleyin, 0 ilk çalışacağı anlamına gelir
-    public int callbackOrder => 0;
-
-    public void OnPreprocessBuild(BuildReport report)
+    public class BuildVersionProcessor : IPreprocessBuildWithReport
     {
-        // Versiyon numarası isteyen bir pencere açın
-        string newVersion = EditorUtility.DisplayDialogComplex("Versiyon Numarası", "Versiyon numarasını girin:", "Tamam", "İptal", null).ToString();
+        public int callbackOrder => 0;
 
-        // Kullanıcı iptal ettiyse işlemi durdurun
-        if (string.IsNullOrEmpty(newVersion))
+        public void OnPreprocessBuild(BuildReport report)
         {
-            Debug.LogError("Build, kullanıcı tarafından iptal edildi.");
-            throw new BuildFailedException("Build, kullanıcı tarafından iptal edildi.");
+            string currentVersion = PlayerSettings.bundleVersion;
+            BuildVersionWindow.ShowWindow(currentVersion);
+
+            if (BuildVersionWindow.WasCanceled())
+            {
+                throw new BuildFailedException("Build was canceled by the user.");
+            }
+
+            if (BuildVersionWindow.TryGetVersion(out string newVersion))
+            {
+                PlayerSettings.bundleVersion = newVersion;
+                UnityEngine.Debug.Log($"Build version updated to: {newVersion}");
+            }
         }
-
-        // Yeni versiyonu ayarlayın
-        PlayerSettings.bundleVersion = newVersion;
-
-        // Yeni versiyonu onaylamak için log yazdırın
-        Debug.Log("Versiyon şu şekilde ayarlandı: " + newVersion);
     }
+
 }
+
