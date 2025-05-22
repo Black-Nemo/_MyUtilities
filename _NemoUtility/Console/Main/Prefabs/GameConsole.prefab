@@ -25,6 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124161862361755680}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,7 +33,6 @@ Transform:
   m_Children:
   - {fileID: 8450011703128494721}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2124161862361755711
 MonoBehaviour:
@@ -46,7 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4230d9bd625c2441b2dc0ea8bbf9155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consoleObjectPrefab: {fileID: 8054231046384891192, guid: 07754a634e22828428015ec4644e5e1f, type: 3}
+  canUnityDebug: 1
+  _logTypes: 0000000004000000
+  _logColors:
+  - LogType: 0
+    Color: <color=#FF0000>
+  - LogType: 4
+    Color: <color=#FF0000>
+  consoleObjectPrefab: {fileID: 8054231046384891192, guid: 07754a634e22828428015ec4644e5e1f,
+    type: 3}
   _spawnTransform: {fileID: 6030894671495529515}
   consolePanel: {fileID: 0}
 --- !u!114 &2124161862361755709
@@ -66,36 +74,6 @@ MonoBehaviour:
   LoginPassword: 123456
   Datas: []
   gameConsole: {fileID: 2124161862361755711}
-  red: <color=#FF0000>
-  green: <color=#00FF00>
-  blue: <color=#0000FF>
-  yellow: <color=#FFFF00>
-  cyan: <color=#00FFFF>
-  magenta: <color=#FF00FF>
-  black: <color=#000000>
-  white: <color=#FFFFFF>
-  gray: <color=#808080>
-  orange: <color=#FFA500>
-  pink: <color=#FFC0CB>
-  purple: <color=#800080>
-  brown: <color=#A52A2A>
-  lime: <color=#00FF00>
-  olive: <color=#808000>
-  maroon: <color=#800000>
-  navy: <color=#000080>
-  teal: <color=#008080>
-  gold: <color=#FFD700>
-  silver: <color=#C0C0C0>
-  beige: <color=#F5F5DC>
-  lavender: <color=#E6E6FA>
-  salmon: <color=#FA8072>
-  coral: <color=#FF7F50>
-  turquoise: <color=#40E0D0>
-  indigo: <color=#4B0082>
-  violet: <color=#EE82EE>
-  ivory: <color=#FFFFF0>
-  khaki: <color=#F0E68C>
-  endColor: </color>
 --- !u!1 &4666030192174611644
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +105,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8450011703128494721}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -205,7 +182,6 @@ RectTransform:
   m_Children:
   - {fileID: 6030894671495529515}
   m_Father: {fileID: 2124161862361755710}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -230,7 +206,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0

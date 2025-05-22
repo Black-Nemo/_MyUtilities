@@ -21,25 +21,38 @@ namespace NemoUtility
         public static MouseInfoManager Instance;
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(Instance);
-            }
-            else
+            if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
+                return;
             }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
-        public void Active(string str, Color bgColor)
+        public MouseInfo Active(string str, Color bgColor)
         {
             if (rememberTextObject != null) { Destroy(rememberTextObject); }
             rememberTextObject = Instantiate(InfoTextPrefab, canvas);
             rememberTextObject.transform.SetParent(canvas);
-            rememberTextObject.GetComponent<MouseInfo>().Text.text = str;
+            var mouseInfo = rememberTextObject.GetComponent<MouseInfo>();
+            mouseInfo.Text.text = str;
             rememberTextObject.GetComponent<Image>().color = bgColor;
+
+            return mouseInfo;
         }
+        public MouseInfo ActiveNotDestroy(string str, Color bgColor)
+        {
+            rememberTextObject = Instantiate(InfoTextPrefab, canvas);
+            rememberTextObject.transform.SetParent(canvas);
+            var mouseInfo = rememberTextObject.GetComponent<MouseInfo>();
+            mouseInfo.Text.text = str;
+            rememberTextObject.GetComponent<Image>().color = bgColor;
+
+            return mouseInfo;
+        }
+
         public void DeActive()
         {
             Destroy(rememberTextObject);
@@ -61,6 +74,7 @@ namespace NemoUtility
 
         private void Update()
         {
+            /*
             if (rememberTextObject != null)
             {
                 Vector2 locationText;
@@ -90,7 +104,7 @@ namespace NemoUtility
             if (rememberImageObject != null)
             {
                 rememberImageObject.transform.position = Input.mousePosition + new Vector3(LocationImage.x, LocationImage.y, 0);
-            }
+            }*/
         }
     }
 }

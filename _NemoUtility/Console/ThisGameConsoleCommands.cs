@@ -1,3 +1,7 @@
+using System;
+using UnityEngine;
+using NemoUtility;
+
 public class ThisGameConsoleCommands : ConsoleCommandLineData
 {
     protected override void Awake()
@@ -10,9 +14,9 @@ public class ThisGameConsoleCommands : ConsoleCommandLineData
 
     public void help()
     {
-        if (Datas.Length > 1 && Datas.Length < 1) { gameConsole.Println(red + "!Invalid Value"); return; }
+        if (Datas.Length > 1 && Datas.Length < 1) { gameConsole.Println(ConsoleColors.red + "!Invalid Value"); return; }
 
-        gameConsole.Println(gold + "help");
+        gameConsole.Println(ConsoleColors.gold + "help");
     }
 
     public override void inputField_ValueChanged(string text)
