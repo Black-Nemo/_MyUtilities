@@ -46,6 +46,7 @@ namespace NemoUtility
             switch (platformTypes)
             {
                 case PlatformTypes.Local:
+                    _currentPlatform = new LocalPlatform();
                     break;
                 case PlatformTypes.YandexGames:
                     _currentPlatform = new YandexGamesPlatform();
