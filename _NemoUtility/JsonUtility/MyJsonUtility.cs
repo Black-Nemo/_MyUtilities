@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace NemoUtility
 {
@@ -7,26 +8,40 @@ namespace NemoUtility
     {
         public static void SaveData(string filePath, T @class)
         {
-            string json = JsonUtility.ToJson(@class);
+            string json = JsonConvert.SerializeObject(@class);
             File.WriteAllText(filePath, json);
         }
 
         public static T Load(string filePath)
         {
-            var result = new T();
-
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
-                string json = File.ReadAllText(filePath);
-                JsonUtility.FromJsonOverwrite(json, result);
-            }
-            else
-            {
-                return null;
+                string dir = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+
+                // Varsayılan boş obje olarak kaydet
+                T defaultObj = new T();
+                string defaultJson = JsonConvert.SerializeObject(defaultObj);
+                File.WriteAllText(filePath, defaultJson);
             }
 
+            string json = File.ReadAllText(filePath);
+            T result = new T();
+            result = JsonConvert.DeserializeObject<T>(json);
             return result;
         }
+
+        public static void Save(string filePath, T data)
+        {
+            string dir = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            string json = JsonConvert.SerializeObject(data);
+            File.WriteAllText(filePath, json);
+        }
+
         public static string GetFileText(string filePath)
         {
             if (File.Exists(filePath))

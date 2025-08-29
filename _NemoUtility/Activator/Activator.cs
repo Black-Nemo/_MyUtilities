@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,21 +12,27 @@ namespace NemoUtility
         [SerializeField] private string ActiveTag;
         [SerializeField] private Component component;
 
-        public UnityEvent OnCollisionEnterEvent;
-        public UnityEvent OnCollisionExitEvent;
-        public UnityEvent OnTriggerEnterEvent;
-        public UnityEvent OnTriggerExitEvent;
+        public UnityEvent OnCollisionEnterUnityEvent;
+        public UnityEvent OnCollisionExitUnityEvent;
+        public UnityEvent OnTriggerEnterUnityEvent;
+        public UnityEvent OnTriggerExitUnityEvent;
+
+        public Action<GameObject> OnCollisionEnterEvent;
+        public Action<GameObject> OnCollisionExitEvent;
+        public Action<GameObject> OnTriggerEnterEvent;
+        public Action<GameObject> OnTriggerExitEvent;
 
         [Header("EnableEvents")]
-        public UnityEvent OnEnableEvent;
-        public UnityEvent OnDisableEvent;
+        public UnityEvent OnEnableUnityEvent;
+        public UnityEvent OnDisableUnityEvent;
+
         private void OnEnable()
         {
-            OnEnableEvent?.Invoke();
+            OnEnableUnityEvent.Invoke();
         }
         private void OnDisable()
         {
-            OnDisableEvent?.Invoke();
+            OnDisableUnityEvent?.Invoke();
         }
         private void Update()
         {
@@ -40,23 +47,23 @@ namespace NemoUtility
 
         private void OnCollisionEnter(Collision other)
         {
-            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnCollisionEnterEvent?.Invoke(); }
-            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnCollisionEnterEvent?.Invoke(); }
+            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnCollisionEnterEvent?.Invoke(other.gameObject); OnCollisionEnterUnityEvent?.Invoke(); }
+            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnCollisionEnterEvent?.Invoke(other.gameObject); OnCollisionEnterUnityEvent?.Invoke(); }
         }
         private void OnCollisionExit(Collision other)
         {
-            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnCollisionExitEvent?.Invoke(); }
-            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnCollisionExitEvent?.Invoke(); }
+            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnCollisionExitEvent?.Invoke(other.gameObject); OnCollisionExitUnityEvent?.Invoke(); }
+            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnCollisionExitEvent?.Invoke(other.gameObject); OnCollisionExitUnityEvent?.Invoke(); }
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnTriggerEnterEvent?.Invoke(); }
-            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnTriggerEnterEvent?.Invoke(); }
+            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnTriggerEnterEvent?.Invoke(other.gameObject); OnTriggerEnterUnityEvent?.Invoke(); }
+            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnTriggerEnterEvent?.Invoke(other.gameObject); OnTriggerEnterUnityEvent?.Invoke(); }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnTriggerExitEvent?.Invoke(); }
-            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnTriggerExitEvent?.Invoke(); }
+            if (ActiveTag == "" || ActiveTag == other.gameObject.tag) { OnTriggerExitEvent?.Invoke(other.gameObject); OnTriggerExitUnityEvent?.Invoke(); }
+            if (component != null && other.gameObject.TryGetComponent(out Component _component)) { OnTriggerExitEvent?.Invoke(other.gameObject); OnTriggerExitUnityEvent?.Invoke(); }
         }
     }
     [System.Serializable]
