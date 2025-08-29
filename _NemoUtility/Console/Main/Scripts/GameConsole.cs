@@ -128,6 +128,7 @@ namespace NemoUtility
 
         public void OpenCloseConsole()
         {
+            if (consoleObject == null) { return; }
             if (consoleObject.activeSelf) { consolePanel.inputField.text = ""; }
 
             consoleObject.SetActive(!consoleObject.activeSelf);
@@ -274,6 +275,11 @@ namespace NemoUtility
             consolePanel.beforeText.text += str + " \n";
             consolePanel.inputField.Select();
             consolePanel.inputField.ActivateInputField();
+        }
+
+        public void ClearConsole()
+        {
+            consolePanel.beforeText.text = "";
         }
     }
 }

@@ -145,6 +145,11 @@ namespace NemoUtility
             }
 
         }
+
+        public void clear(){
+            if (Datas.Length > 1 && Datas.Length < 1) { gameConsole.Println(ConsoleColors.red + "!Invalid Value"); return; }
+            gameConsole.ClearConsole();
+        }
     }
 
 }
