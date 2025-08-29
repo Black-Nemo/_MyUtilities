@@ -1,63 +1,65 @@
 using System.Collections.Generic;
 using System.Linq;
-using NemoUtility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TouchTry : MonoBehaviour
+namespace NemoUtility
 {
-    public List<MouseInfo> mouseInfos = new List<MouseInfo>();
-
-    public static TouchTry Instance;
-    private void Awake()
+    public class TouchTry : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        public List<MouseInfo> mouseInfos = new List<MouseInfo>();
+
+        public static TouchTry Instance;
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    void Update()
-    {
-
-        if (Touchscreen.current == null) return;
-
-        var activeTouches = Touchscreen.current.touches
-            .Where(t => t.press.isPressed || t.press.wasPressedThisFrame || t.press.wasReleasedThisFrame)
-            .ToList();
-
-        // Ayarla mouseInfos sayısını
-        while (mouseInfos.Count < activeTouches.Count)
-        {
-            mouseInfos.Add(MouseInfoManager.Instance.ActiveNotDestroy("null", Color.black));
-        }
-        while (mouseInfos.Count > activeTouches.Count)
-        {
-            var d = mouseInfos[mouseInfos.Count - 1];
-            mouseInfos.RemoveAt(mouseInfos.Count - 1);
-            if (d != null) Destroy(d.gameObject);
-        }
-
-        for (int i = 0; i < activeTouches.Count; i++)
-        {
-            try
+            if (Instance != null && Instance != this)
             {
-                var touch = activeTouches[i];
-                mouseInfos[i].Text.text = touch.touchId.ReadValue().ToString();
-                Vector2 pos = touch.position.ReadValue();
-                mouseInfos[i].transform.position = new Vector3(pos.x, pos.y + 100, 0);
+                Destroy(gameObject);
+                return;
             }
-            catch (System.Exception e)
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        void Update()
+        {
+
+            if (Touchscreen.current == null) return;
+
+            var activeTouches = Touchscreen.current.touches
+                .Where(t => t.press.isPressed || t.press.wasPressedThisFrame || t.press.wasReleasedThisFrame)
+                .ToList();
+
+            // Ayarla mouseInfos sayısını
+            while (mouseInfos.Count < activeTouches.Count)
             {
-                if (mouseInfos[i] != null)
+                mouseInfos.Add(MouseInfoManager.Instance.ActiveNotDestroy("null", Color.black));
+            }
+            while (mouseInfos.Count > activeTouches.Count)
+            {
+                var d = mouseInfos[mouseInfos.Count - 1];
+                mouseInfos.RemoveAt(mouseInfos.Count - 1);
+                if (d != null) Destroy(d.gameObject);
+            }
+
+            for (int i = 0; i < activeTouches.Count; i++)
+            {
+                try
                 {
-                    Destroy(mouseInfos[i].gameObject);
+                    var touch = activeTouches[i];
+                    mouseInfos[i].Text.text = touch.touchId.ReadValue().ToString();
+                    Vector2 pos = touch.position.ReadValue();
+                    mouseInfos[i].transform.position = new Vector3(pos.x, pos.y + 100, 0);
                 }
-                Debug.LogError(e);
+                catch (System.Exception e)
+                {
+                    if (mouseInfos[i] != null)
+                    {
+                        Destroy(mouseInfos[i].gameObject);
+                    }
+                    Debug.LogError(e);
+                }
             }
         }
     }

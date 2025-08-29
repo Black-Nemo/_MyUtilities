@@ -1,10 +1,14 @@
 using UnityEngine;
 
-public class LookCamera : MonoBehaviour
+namespace NemoUtility
 {
-    private void LateUpdate()
+    public class LookCamera : MonoBehaviour
     {
-        transform.LookAt(transform.position + Camera.main.transform.transform.rotation * Vector3.forward, Camera.main.transform.transform.rotation * Vector3.up);
-        //transform.LookAt(Camera.main.gameObject.transform);
+        private void LateUpdate()
+        {
+            transform.LookAt(transform.position + Camera.main.transform.transform.rotation * Vector3.forward, Camera.main.transform.transform.rotation * Vector3.up);
+            //transform.LookAt(Camera.main.gameObject.transform);
+        }
     }
+
 }

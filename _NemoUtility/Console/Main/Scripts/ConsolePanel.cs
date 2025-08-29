@@ -4,10 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConsolePanel : MonoBehaviour
+namespace NemoUtility
 {
-    public TextMeshProUGUI beforeText;
-    public TMP_InputField inputField;
+    public class ConsolePanel : MonoBehaviour
+    {
+        public TextMeshProUGUI beforeText;
+        public TMP_InputField inputField;
 
-    public TextMeshProUGUI infoThisCommondText; 
+        public TextMeshProUGUI infoThisCommondText;
+    }
 }

@@ -1,34 +1,36 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class FpsShow : MonoBehaviour
+namespace NemoUtility
 {
-    public TextMeshProUGUI fpsText;
-    private float sequency = 1f;
-    public float deltaTime;
-
-    private float _fps;
-    private void Start()
+    public class FpsShow : MonoBehaviour
     {
-        StartCoroutine(FpsEnumator());
-    }
+        public TextMeshProUGUI fpsText;
+        private float sequency = 1f;
+        public float deltaTime;
 
-    void Update()
-    {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        float fps = 1.0f / deltaTime;
-        _fps = Mathf.Ceil(fps);
-    }
-
-
-    private IEnumerator FpsEnumator()
-    {
-        while (true)
+        private float _fps;
+        private void Start()
         {
-            fpsText.text = _fps.ToString();
-            yield return new WaitForSeconds(sequency);
+            StartCoroutine(FpsEnumator());
+        }
+
+        void Update()
+        {
+            deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+            float fps = 1.0f / deltaTime;
+            _fps = Mathf.Ceil(fps);
+        }
+
+
+        private IEnumerator FpsEnumator()
+        {
+            while (true)
+            {
+                fpsText.text = _fps.ToString();
+                yield return new WaitForSeconds(sequency);
+            }
         }
     }
 }

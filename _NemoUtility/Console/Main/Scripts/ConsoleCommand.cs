@@ -1,52 +1,55 @@
 using System;
 using System.Collections.Generic;
 
-public class ConsoleCommand
+namespace NemoUtility
 {
-    public string Name;
-    public Parameter FirstParameter;
-
-    public List<string> GetValues(string[] strs)
+    public class ConsoleCommand
     {
-        Parameter tempParameter = FirstParameter;
-        int counter = 1;
-        while (tempParameter.NextParameter != null)
+        public string Name;
+        public Parameter FirstParameter;
+
+        public List<string> GetValues(string[] strs)
         {
-            if (counter >= strs.Length) { return null; }
-            if (tempParameter.IsTrue(strs[counter]))
+            Parameter tempParameter = FirstParameter;
+            int counter = 1;
+            while (tempParameter.NextParameter != null)
             {
-                tempParameter = tempParameter.NextParameter;
-                counter++;
+                if (counter >= strs.Length) { return null; }
+                if (tempParameter.IsTrue(strs[counter]))
+                {
+                    tempParameter = tempParameter.NextParameter;
+                    counter++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (counter >= strs.Length)
+            {
+                return null;
             }
             else
             {
-                break;
+                return tempParameter.GetValues(strs[counter]);
             }
         }
-        if (counter >= strs.Length)
-        {
-            return null;
-        }
-        else
-        {
-            return tempParameter.GetValues(strs[counter]);
-        }
     }
-}
-public class Parameter
-{
-    public Parameter NextParameter;
-    public Func<string, List<string>> ValuesFunc;
-    public Func<string, bool> TrueFunc;
-
-    public bool IsTrue(string str)
+    public class Parameter
     {
-        bool? result = TrueFunc?.Invoke(str);
-        return result.Value;
-    }
+        public Parameter NextParameter;
+        public Func<string, List<string>> ValuesFunc;
+        public Func<string, bool> TrueFunc;
 
-    public List<string> GetValues(string str)
-    {
-        return ValuesFunc?.Invoke(str);
+        public bool IsTrue(string str)
+        {
+            bool? result = TrueFunc?.Invoke(str);
+            return result.Value;
+        }
+
+        public List<string> GetValues(string str)
+        {
+            return ValuesFunc?.Invoke(str);
+        }
     }
 }

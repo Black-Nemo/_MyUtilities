@@ -1,31 +1,33 @@
-using NemoUtility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlatformExample : MonoBehaviour
+namespace NemoUtility
 {
-    //String
-    //Get
-    [SerializeField] private TMP_InputField GetStringIdInputField;
-    [SerializeField] private Button GetStringButton;
-    [SerializeField] private TextMeshProUGUI GetStringText;
-
-    //Set
-    [SerializeField] private Button SetStringButton;
-    [SerializeField] private TMP_InputField SetStringIdInputField;
-    [SerializeField] private TMP_InputField SetStringValueInputField;
-
-
-    private void Awake()
+    public class PlatformExample : MonoBehaviour
     {
-        GetStringButton.onClick.AddListener(() =>
+        //String
+        //Get
+        [SerializeField] private TMP_InputField GetStringIdInputField;
+        [SerializeField] private Button GetStringButton;
+        [SerializeField] private TextMeshProUGUI GetStringText;
+
+        //Set
+        [SerializeField] private Button SetStringButton;
+        [SerializeField] private TMP_InputField SetStringIdInputField;
+        [SerializeField] private TMP_InputField SetStringValueInputField;
+
+
+        private void Awake()
         {
-            GetStringText.text = DataManager.Instance.GetString(GetStringIdInputField.text);
-        });
-        SetStringButton.onClick.AddListener(() =>
-        {
-            DataManager.Instance.SetString(SetStringIdInputField.text, SetStringValueInputField.text);
-        });
+            GetStringButton.onClick.AddListener(() =>
+            {
+                GetStringText.text = DataManager.Instance.GetString(GetStringIdInputField.text);
+            });
+            SetStringButton.onClick.AddListener(() =>
+            {
+                DataManager.Instance.SetString(SetStringIdInputField.text, SetStringValueInputField.text);
+            });
+        }
     }
 }

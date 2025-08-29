@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class VersionText : MonoBehaviour
+namespace NemoUtility
 {
-    private void Start()
+    public class VersionText : MonoBehaviour
     {
-        GetComponent<TextMeshProUGUI>().text = Application.version;
+        private void Start()
+        {
+            GetComponent<TextMeshProUGUI>().text = Application.version;
+        }
     }
+
 }

@@ -1,39 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using NemoUtility;
 using TMPro;
 using UnityEngine;
 
-public class LocalizeTMP : MonoBehaviour
+namespace NemoUtility
 {
-    [SerializeField] private string _key;
-
-    private LocalizeString _localizeString;
-
-    private TextMeshProUGUI _textMeshProUGUI;
-
-    private Localization _localization;
-    private void Awake()
+    public class LocalizeTMP : MonoBehaviour
     {
-        _localization = LocalizationManager.Instance.GetLocalization();
-        _localizeString = _localization.GetLocalizeString(_key);
+        [SerializeField] private string _key;
 
-        _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-    }
+        private LocalizeString _localizeString;
 
-    private void OnEnable()
-    {
-        _localization.LocalizeChangeEvent += ChangeLocalize;
-        ChangeLocalize(_localization.CurrentLocalize);
-    }
-    private void OnDisable()
-    {
-        _localization.LocalizeChangeEvent -= ChangeLocalize;
-    }
+        private TextMeshProUGUI _textMeshProUGUI;
 
-    public void ChangeLocalize(Locale localize)
-    {
-        _textMeshProUGUI.text = _localizeString.GetLocalizedString();
-    }
+        private Localization _localization;
+        private void Awake()
+        {
+            _localization = LocalizationManager.Instance.GetLocalization();
+            _localizeString = _localization.GetLocalizeString(_key);
 
+            _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+        }
+
+        private void OnEnable()
+        {
+            _localization.LocalizeChangeEvent += ChangeLocalize;
+            ChangeLocalize(_localization.CurrentLocalize);
+        }
+        private void OnDisable()
+        {
+            _localization.LocalizeChangeEvent -= ChangeLocalize;
+        }
+
+        public void ChangeLocalize(Locale localize)
+        {
+            _textMeshProUGUI.text = _localizeString.GetLocalizedString();
+        }
+
+    }
 }
