@@ -18,7 +18,7 @@ namespace NemoUtility
         [SerializeField] private float _groundRayDistance = 1f;
         [SerializeField] private LayerMask _groundCheckLayerMask;
 
-        [Header("GroundCollisionControl")]
+        [Header("HeadPoundingCollisionControl")]
         [SerializeField] private float _headPoundingRayDistance = 1f;
         [SerializeField] private LayerMask _headPoundingCheckLayerMask;
 
