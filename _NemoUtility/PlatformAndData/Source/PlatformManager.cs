@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace NemoUtility
 {
+    [DefaultExecutionOrder(-10000)]
     public class PlatformManager : MonoBehaviour
     {
         public PlatformTypes PlatformTypes;

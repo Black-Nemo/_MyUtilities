@@ -1,6 +1,6 @@
 using System.IO;
 using UnityEngine;
-using Newtonsoft.Json;
+using Newtonsoft.Json;//com.unity.nuget.newtonsoft-json
 
 namespace NemoUtility
 {

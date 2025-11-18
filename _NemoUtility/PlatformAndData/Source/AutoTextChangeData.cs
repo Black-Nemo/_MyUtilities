@@ -8,6 +8,12 @@ namespace NemoUtility
         [SerializeField] private TextMeshProUGUI Text;
         [SerializeField] private string Key;
 
+        private void OnEnable()
+        {
+            DataManager.Instance.SetDataEvent += SetData;
+            SetData(Key, DataManager.Instance.GetInt(Key, true));
+        }
+
         private void OnDisable()
         {
             DataManager.Instance.SetDataEvent -= SetData;
@@ -15,7 +21,6 @@ namespace NemoUtility
 
         public void Start()
         {
-            DataManager.Instance.SetDataEvent += SetData;
             SetData(Key, DataManager.Instance.GetInt(Key, true));
         }
 

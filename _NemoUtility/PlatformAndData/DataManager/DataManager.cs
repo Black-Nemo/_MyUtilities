@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace NemoUtility
 {
+    [DefaultExecutionOrder(-1000)]
     public class DataManager : MonoBehaviour
     {
         public Action<string, object> SetDataEvent;
@@ -61,9 +62,13 @@ namespace NemoUtility
         public float GetFloat(string id)
         {
             var data = PlatformManager.Instance.GetData(id);
-            if (data is float d)
+            if (data is float f)
             {
-                return d;
+                return f;
+            }
+            else if (data is double d)
+            {
+                return (float)d;
             }
             else
             {

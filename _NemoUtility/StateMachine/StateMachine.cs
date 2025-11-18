@@ -16,6 +16,7 @@ namespace NemoUtility
         {
             CurrentState?.ExitState(_owner);
             CurrentState = newState;
+            newState.Init();
             CurrentState?.EnterState(_owner);
         }
 
