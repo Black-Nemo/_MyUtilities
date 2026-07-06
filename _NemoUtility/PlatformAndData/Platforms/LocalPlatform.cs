@@ -25,7 +25,18 @@ namespace NemoUtility
 
         public override void FullScreenShow(Action finishAction)
         {
-            throw new NotImplementedException();
+            // Local platform - ads not implemented, call back directly
+            finishAction?.Invoke();
+        }
+
+        public override void ShowBanner()
+        {
+            // Local platform - no banner
+        }
+
+        public override void HideBanner()
+        {
+            // Local platform - no banner
         }
 
         public override Data GetAllData()
@@ -58,7 +69,8 @@ namespace NemoUtility
 
         public override void Rewarded(Action rewardComplateAction)
         {
-            throw new NotImplementedException();
+            // Local platform - ads not implemented, call back directly
+            rewardComplateAction?.Invoke();
         }
 
         public override void SetData(string id, object value)

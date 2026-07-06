@@ -21,8 +21,16 @@ namespace NemoUtility
             {
                 if (service.MonoService is IService)
                 {
+
                     Type type = service.MonoService.GetType();
                     Type genericType = typeof(ServiceLocator<>).MakeGenericType(type);
+
+                    var isRegisteredMethod = genericType.GetMethod("IsRegistered");
+                    if ((bool)isRegisteredMethod.Invoke(null, null))
+                    {
+                        Debug.Log($"{service.MonoService.name} is already registered.");
+                        continue;
+                    }
 
                     var addMethod = genericType.GetMethod("AddService");
                     addMethod.Invoke(null, new object[] { service.MonoService });

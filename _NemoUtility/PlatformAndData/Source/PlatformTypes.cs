@@ -5,5 +5,6 @@ namespace NemoUtility
         Local = 0,
         YandexGames = 1,
         CrazyGames = 2,
+        Android = 3,
     }
 }

@@ -53,8 +53,7 @@ MonoBehaviour:
     Color: <color=#FF0000>
   - LogType: 4
     Color: <color=#FF0000>
-  consoleObjectPrefab: {fileID: 8054231046384891192, guid: 07754a634e22828428015ec4644e5e1f,
-    type: 3}
+  consoleObjectPrefab: {fileID: 8054231046384891192, guid: 07754a634e22828428015ec4644e5e1f, type: 3}
   _spawnTransform: {fileID: 6030894671495529515}
   consolePanel: {fileID: 0}
 --- !u!114 &2124161862361755709
@@ -209,7 +208,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 500
   m_TargetDisplay: 0
 --- !u!114 &5191647744603597188
 MonoBehaviour:

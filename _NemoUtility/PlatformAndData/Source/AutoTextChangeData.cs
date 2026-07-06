@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace NemoUtility
 {
@@ -7,6 +9,8 @@ namespace NemoUtility
     {
         [SerializeField] private TextMeshProUGUI Text;
         [SerializeField] private string Key;
+
+        [SerializeField] private RectTransform _parentContentSizeFildterTargetRectTransform;
 
         private void OnEnable()
         {
@@ -29,7 +33,17 @@ namespace NemoUtility
             if (id == Key)
             {
                 Text.text = value.ToString();
+                if (_parentContentSizeFildterTargetRectTransform != null) { StartCoroutine(UpdateLayoutNextFrame(_parentContentSizeFildterTargetRectTransform)); }
             }
+        }
+
+        public IEnumerator UpdateLayoutNextFrame(RectTransform rectTransform)
+        {
+            // O anki frame'in bitmesini bekle
+            yield return new WaitForEndOfFrame();
+
+            // Layout'u güncelle
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
         }
     }
 }

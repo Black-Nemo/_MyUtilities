@@ -22,6 +22,11 @@ namespace NemoUtility
             }
         }
 
+        public bool HasData(string id)
+        {
+            return PlatformManager.Instance.GetData(id) != null;
+        }
+
         public int GetInt(string id, bool IfNullSave = false)
         {
             var data = PlatformManager.Instance.GetData(id);
@@ -38,11 +43,11 @@ namespace NemoUtility
                 if (IfNullSave)
                 {
                     SetInt(id, 0);
-                    return GetInt(id);
+                    return 0;
                 }
                 else
                 {
-                    throw new Exception404("404");
+                    return 0;
                 }
             }
         }
@@ -55,7 +60,7 @@ namespace NemoUtility
             }
             else
             {
-                throw new Exception404("404");
+                return "";
             }
         }
 
@@ -70,22 +75,54 @@ namespace NemoUtility
             {
                 return (float)d;
             }
+            else if (data is int i)
+            {
+                return (float)i;
+            }
+            else if (data is long l)
+            {
+                return (float)l;
+            }
             else
             {
-                throw new Exception404("404");
+                return 0f;
             }
         }
 
-        public bool GetBool(string id)
+        public bool GetBool(string id, bool IfNullSave = false)
         {
             var data = PlatformManager.Instance.GetData(id);
             if (data is bool d)
             {
                 return d;
             }
+            else if (data is long l)
+            {
+                return l != 0;
+            }
+            else if (data is int i)
+            {
+                return i != 0;
+            }
+            else if (data is double dbl)
+            {
+                return dbl != 0;
+            }
+            else if (data is string s)
+            {
+                return s.Equals("true", System.StringComparison.OrdinalIgnoreCase) || s == "1";
+            }
             else
             {
-                throw new Exception404("404");
+                if (IfNullSave)
+                {
+                    SetBool(id, false);
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

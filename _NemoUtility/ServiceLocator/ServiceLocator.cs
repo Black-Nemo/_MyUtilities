@@ -5,9 +5,17 @@ namespace NemoUtility
     public static class ServiceLocator<T> where T : class, IService
     {
         private static T _service;
+
+        private static bool IsNull(T service)
+        {
+            if (service == null) return true;
+            if (service is UnityEngine.Object obj) return obj == null;
+            return false;
+        }
+
         public static void AddService(T service)
         {
-            if (_service != null)
+            if (!IsNull(_service))
             {
                 Debug.LogWarning($"{typeof(T)} already registered");
                 return;
@@ -17,7 +25,7 @@ namespace NemoUtility
 
         public static T GetService()
         {
-            if (_service == null)
+            if (IsNull(_service))
             {
                 Debug.LogError($"{typeof(T)} is not registered in the Service Locator!");
                 return null;
@@ -27,7 +35,7 @@ namespace NemoUtility
 
         public static bool TryGetService(out T service)
         {
-            if (_service != null)
+            if (!IsNull(_service))
             {
                 service = _service;
                 return true;
@@ -38,12 +46,12 @@ namespace NemoUtility
 
         public static bool IsRegistered()
         {
-            return (_service != null);
+            return !IsNull(_service);
         }
 
         public static void RemoveService()
         {
-            if (_service == null)
+            if (IsNull(_service))
             {
                 Debug.LogWarning($"{typeof(T)} already no");
                 return;

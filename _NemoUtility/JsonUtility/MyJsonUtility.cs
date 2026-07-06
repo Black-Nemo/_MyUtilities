@@ -1,6 +1,8 @@
 using System.IO;
 using UnityEngine;
+#if USE_NEWTONSOFT_JSON
 using Newtonsoft.Json;//com.unity.nuget.newtonsoft-json
+#endif
 
 namespace NemoUtility
 {
@@ -8,7 +10,11 @@ namespace NemoUtility
     {
         public static void SaveData(string filePath, T @class)
         {
+#if USE_NEWTONSOFT_JSON
             string json = JsonConvert.SerializeObject(@class);
+#else
+            string json = JsonUtility.ToJson(@class);
+#endif
             File.WriteAllText(filePath, json);
         }
 
@@ -22,13 +28,21 @@ namespace NemoUtility
 
                 // Varsayılan boş obje olarak kaydet
                 T defaultObj = new T();
+#if USE_NEWTONSOFT_JSON
                 string defaultJson = JsonConvert.SerializeObject(defaultObj);
+#else
+                string defaultJson = JsonUtility.ToJson(defaultObj);
+#endif
                 File.WriteAllText(filePath, defaultJson);
             }
 
             string json = File.ReadAllText(filePath);
             T result = new T();
+#if USE_NEWTONSOFT_JSON
             result = JsonConvert.DeserializeObject<T>(json);
+#else
+            result = JsonUtility.FromJson<T>(json);
+#endif
             return result;
         }
 
@@ -38,7 +52,11 @@ namespace NemoUtility
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
+#if USE_NEWTONSOFT_JSON
             string json = JsonConvert.SerializeObject(data);
+#else
+            string json = JsonUtility.ToJson(data);
+#endif
             File.WriteAllText(filePath, json);
         }
 

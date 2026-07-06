@@ -12,7 +12,6 @@ namespace NemoUtility
             DataManager.Instance.SetDataEvent -= SetData;
         }
 
-
         public void Start()
         {
             DataManager.Instance.SetDataEvent += SetData;

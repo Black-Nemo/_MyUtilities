@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace NemoUtility
 {
+    [RequireComponent(typeof(TextMeshProUGUI))]
     public class LocalizeTMP : MonoBehaviour
     {
         [SerializeField] private string _key;

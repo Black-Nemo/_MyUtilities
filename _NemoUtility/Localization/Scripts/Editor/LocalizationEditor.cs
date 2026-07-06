@@ -18,11 +18,6 @@ namespace NemoUtility
             _myData = (Localization)target;
 
             GUILayout.Space(10);
-            EditorGUILayout.LabelField("Csv File");
-            _csvFilePath = EditorGUILayout.TextField(_csvFilePath);
-
-
-            GUILayout.Space(10);
             if (GUILayout.Button("ImportCsv"))
             {
                 _myData.LocalizeStrings = GetLocalizeStringTable();
@@ -40,12 +35,19 @@ namespace NemoUtility
         {
             List<LocalizeString> localizeStrings = new List<LocalizeString>();
 
-            TextAsset csvFile = Resources.Load<TextAsset>(_csvFilePath); // Write without .csv extension
+            TextAsset csvFile = _myData.CsvFile;
+            if (csvFile == null)
+            {
+                Debug.LogError("CSV File is not assigned on the Localization asset!");
+                return localizeStrings;
+            }
+
             string[] lines = csvFile.text.Split('\n');
             Debug.Log("l" + lines.Length);
             foreach (string line in lines)
             {
-                localizeStrings.Add(GetLocalizeString(line));
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                localizeStrings.Add(GetLocalizeString(line.Trim()));
             }
             return localizeStrings;
         }

@@ -56,6 +56,16 @@ namespace NemoUtility
 #endif
         }
 
+        public override void ShowBanner()
+        {
+            // Yandex - no banner implementation yet
+        }
+
+        public override void HideBanner()
+        {
+            // Yandex - no banner implementation yet
+        }
+
         public override void Rewarded(Action rewardComplateAction)
         {
 #if YG_PLUGIN_YANDEX_GAME

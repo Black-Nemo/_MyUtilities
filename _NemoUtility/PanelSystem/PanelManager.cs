@@ -29,12 +29,23 @@ namespace NemoUtility
 
         public virtual void OpenPanel(string panelName)
         {
+            Debug.Log($"[PanelManager] Opening Panel: {panelName}");
             foreach (var panel in UIPanels)
             {
+                if (panel.Panel == null)
+                {
+                    Debug.LogError($"[PanelManager] Panel '{panel.Name}' has a NULL GameObject reference!");
+                    continue;
+                }
+
                 if (panel.Name == panelName)
                 {
                     panel.Panel.SetActive(true);
-                    _menuNavigator.Push(panelName);
+                    Debug.Log($"[PanelManager] Set {panel.Name} to ACTIVE. GameObject: {panel.Panel.name}");
+                    if (_menuNavigator.Count == 0 || _menuNavigator.Peek() != panelName)
+                    {
+                        _menuNavigator.Push(panelName);
+                    }
                 }
                 else
                 {
@@ -45,8 +56,16 @@ namespace NemoUtility
 
         public virtual void OpenBackPanel()
         {
+            if (_menuNavigator.Count <= 1) return;
+            
             _menuNavigator.Pop();
             OpenPanel(_menuNavigator.Peek());
+        }
+
+        public string GetMenuNavigatorPeek()
+        {
+            if (_menuNavigator.Count == 0) return "";
+            return _menuNavigator.Peek();
         }
     }
 

@@ -10,6 +10,8 @@ namespace NemoUtility
         public List<Locale> Localizes = new List<Locale>();
         public Locale CurrentLocalize;
 
+        public TextAsset CsvFile;
+
         public Action<Locale> LocalizeChangeEvent;
 
         public List<LocalizeString> LocalizeStrings = new List<LocalizeString>();
